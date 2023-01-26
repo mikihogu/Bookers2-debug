@@ -7,9 +7,9 @@
       <%= render 'form', book: Book.new %>
     </div>
     <div class='col-md-8 offset-md-1'>
-  		<h2>Book detail</h2>
-  		<table class='table'>
-  		  <tr>
+      <h2>Book detail</h2>
+      <table class='table'>
+        <tr>
           <td><%= link_to(@book.user) do %>
             <%= image_tag @book.user.get_profile_image, size:"100x100" %><br>
             <%= @book.user.name %>
@@ -20,6 +20,7 @@
           <td>
             <%= render 'favorite', book: @book %>
           </td>
+          <td><p>コメント数:<%= @book.book_comments.count %></p></td>
           <td>
             <% if @book.user == current_user %>
               <%= link_to 'Edit', edit_book_path(@book), class: "btn btn-sm btn-success" %>
@@ -32,6 +33,7 @@
           </td>
         </tr>
       </table>
+      <%= render 'comment', book: @book, book_comment: @book_comment %>
     </div>
   </div>
 </div>
