@@ -17,9 +17,11 @@
         </td>
         <td><%= link_to book.title,book_path(book.id) %></td>
         <td><%= book.body %></td>
+        <% if current_page?(books_path) %>
         <td>
           <%= render 'books/favorite', book: book %>
         </td>
+        <% end %>
         <td><p>コメント数:<%= book.book_comments.count %></p></td>
       </tr>
     <% end %>
