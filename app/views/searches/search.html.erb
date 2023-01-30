@@ -1,0 +1,7 @@
+<% if @subject == "User" %>
+  <h1>Users search for "<%= @word %>"</h1>
+  <%= render 'users/index', users: @users%>
+<% else %>
+  <h1>Books search for "<%= @word %>"</h1>
+  <%= render 'books/index', books: @books %>
+<% end %>

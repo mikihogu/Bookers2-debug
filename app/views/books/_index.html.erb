@@ -22,7 +22,9 @@
           <%= render 'books/favorite', book: book %>
         </td>
         <% end %>
-        <td><p>コメント数:<%= book.book_comments.count %></p></td>
+        <% unless current_page?(search_path) %>
+          <td><p>コメント数:<%= book.book_comments.count %></p></td>
+        <% end %>
       </tr>
     <% end %>
   </tbody>
