@@ -3,23 +3,21 @@ class Book < ApplicationRecord
   has_many :favorites, dependent: :destroy
   has_many :book_comments, dependent: :destroy
 
-  
-  def self.looks(match, word)
+
+  def self.search_for(word, match)
     if match == "perfect_match"
-      @book = Book.where("title LIKE?", "#{word}")
+      Book.where(title: word)
     elsif match == "forward_match"
-      @book = Book.where("title LIKE?","#{word}%")
+      Book.where('title LIKE?', word+'%')
     elsif match == "backward_match"
-      @book = Book.where("title LIKE?","%#{word}")
-    elsif match == "partial_match"
-      @book = Book.where("title LIKE?","%#{word}%")
+      Book.where('title LIKE?','%'+word)
     else
-      @book = Book.all
+      Book.where('title LIKE?','%'+word+'%')
     end
   end
-  
-  
-  
+
+
+
   validates :title, presence: true
   validates :body, presence: true, length:{maximum:200}
 
