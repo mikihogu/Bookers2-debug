@@ -26,15 +26,15 @@ class User < ApplicationRecord
     following.include?(user)
   end
 
-  def self.search_for(word, match)
-    if match == "perfect_match"
-      User.where(name: word)
-    elsif match == "forward_match"
-      User.where('name LIKE?', word+'%')
-    elsif match == "backward_match"
-      User.where('name LIKE?','%'+word)
+  def self.search_for(content, method)
+    if method == "perfect_match"
+      User.where(name: content)
+    elsif method == "forward_match"
+      User.where('name LIKE?', content + '%')
+    elsif method == "backward_match"
+      User.where('name LIKE?','%' + content)
     else
-      User.where('name LIKE?','%'+word+'%')
+      User.where('name LIKE?','%' + content + '%')
     end
   end
 

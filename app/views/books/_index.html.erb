@@ -19,7 +19,7 @@
         <td><%= book.body %></td>
         <% if current_page?(books_path) %>
         <td>
-          <%= render 'books/favorite', book: book %>
+          <%= render 'favorites/favorite-btn', book: book %>
         </td>
         <% end %>
         <% unless current_page?(search_path) %>
