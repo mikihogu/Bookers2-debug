@@ -1,4 +1,5 @@
+$ (".comments-count_<%= @book.id %>").html("コメント数:<%= @book.book_comments.count %>");
 $ (".comment_form").html("<%= j(render 'book_comments/comment_form', book: @book, book_comment: @book_comment) %>");
 $ (".comment_index").html("<%= j(render 'book_comments/comment_index', book: @book) %>"); 
 <!-- フォームのコメント送信後、空欄に -->
-<!--$ (".comment_form").val('');-->
+$ ("#book_comment_comment").val('');
