@@ -1,0 +1,12 @@
+<% if current_user.followed_by?(@user) %>
+  <% if @haveRoom == true %>　　#共通のRoomが作成されている
+    <%= link_to "チャットルームへ？", room_path %>
+  <% else %>
+    <%= form_with model: @room do |f| %>　#roomsテーブルに情報を送信
+      <%= fields_for @entry do |e| %>　#entriesテーブルに情報を送信
+        <%= e.hidden_field :user_id, value: @user_id %>　#entriesテーブルにuser_idを含める
+      <% end %>
+      <%= f.submit "チャットを始める" %>
+    <% end %>
+  <% end %>
+<% end %>
