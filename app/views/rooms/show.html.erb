@@ -1,1 +1,24 @@
-<h1>チャットルーム</h1>
+<% @entries.each do |e| %>
+<% unless user_id ==  
+<h1><%= e.user.name %>さんとのチャット</h1>
+
+<div class="chat">
+  <% if @messages.present? %>
+    <% @messages.each do |m| %>
+      <div class="chat-box">
+        <div class="chat-content">
+          <%= m.content %>
+        </div>
+      </div>
+    <% end %>
+  <% end %>
+</div>
+<% end %>
+
+<div class="post">
+  <%= form_with model: @message do |f| %>
+    <%= f.text_field :content %>
+    <%= f.hidden_field :room_id, value: @room.id %>
+    <%= f.submit %>
+  <% end %>
+</div>

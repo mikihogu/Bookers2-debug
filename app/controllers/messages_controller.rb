@@ -2,10 +2,14 @@ class MessagesController < ApplicationController
     
   def create
     if Entry.where(user_id: current_user.id, room_id: params[:message][:room_id]).present?
-      @message = Message.create(message_params)
-      redirect_to room_path(@message.room_id)
+      @message = Message.new(message_params)
+      if @message.save
+        redirect_to request.referer, notice: "You have sent message successfully."
+      else
+        redirect_to request.referer
+      end
     else
-      flash[:notice] = "メッセージの送信に失敗しました。"
+      redirect_to request.referer, notice: "Error."
     end
   end
 
@@ -13,5 +17,5 @@ class MessagesController < ApplicationController
   def message_params
     params.require(:message).permit(:user_id, :room_id, :content).merge(user_id: current_user.id)
   end
-    
+  
 end

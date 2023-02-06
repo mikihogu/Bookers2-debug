@@ -1,13 +1,10 @@
-<% if user.following?(current_user) %>
-  <%= link_to "チャットを始める", rooms_path %>
-  <!--% if haveRoom == true %>-->
-    <!--%= link_to "このリンクはどこへ？", room_path %>-->
-  <!--% else %>-->
-    <!--%= form_with model: room do |f| %>-->
-      <!--%= fields_for entry do |e| %>-->
-        <!--%= e.hidden_field :user_id, value: user_id %>-->
-      <!--% end %>-->
-      <!--%= f.submit "チャットを始める" %>-->
-    <!--% end %>-->
-  <!--% end %>-->
-<% end %>
+  <% if haveRoom == true %>
+    <%= link_to "チャット再開", room_path(@roomId) %>
+  <% else %>
+    <%= form_with model: room do |f| %>
+      <%= fields_for entry do |e| %>
+        <%= e.hidden_field :user_id, value: user.id %>
+      <% end %>
+      <%= f.submit "チャットを始める", class: "btn btn-link" %>
+    <% end %>
+  <% end %>
