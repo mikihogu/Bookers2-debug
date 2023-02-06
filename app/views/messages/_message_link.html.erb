@@ -1,5 +1,5 @@
   <% if haveRoom == true %>
-    <%= link_to "チャット再開", room_path(@roomId) %>
+    <%= link_to "チャットを始める", room_path(@roomId) %>
   <% else %>
     <%= form_with model: room do |f| %>
       <%= fields_for entry do |e| %>
