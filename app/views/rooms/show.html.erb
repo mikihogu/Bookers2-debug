@@ -1,32 +1,35 @@
 <% @entries.each do |e| %>
   <% unless e.user == current_user %>
-    <h1><%= e.user.name %>さんとのチャット</h1>
+    <h1 class="ml-5 my-5"><%= image_tag e.user.get_profile_image, size:'70x70', class: 'rounded-circle' %> <%= e.user.name %>さんとのトークルーム</h1>
   <% end %>
 <% end %>
 
 <div class='container'>
   <div class='row'>
-    <div class="col-sm-12 col-md-8 col-lg-5 px-5 px-sm-0 mx-5">
+    <div class="col-sm-12 col-md-10 col-lg-8 px-5 px-sm-0 mx-5">
       <div class="chat">
-      <table>
         <% if @messages.present? %>
           <% @messages.each do |m| %>
             <div class="chat-box">
-              <tr class="chat-content">
-                <td><%= m.content %></td>
-                <td></td>
-                <td>by<%= m.user.name %></td>
-              </tr>
+              <div class="chat-content">
+                <p>
+                  <%= image_tag m.user.get_profile_image, size:'30x30', class: 'rounded-circle' %>
+                  <strong><%= m.user.name %></strong>
+                </p>
+                <p class="ml-5"><%= m.content %></p>
+                <!--<p class="text-right">-->
+                  <!--%= m.created_at .strftime("%d/%m/%y") %>-->
+                <!--</p>-->
+              </div>
             </div>
           <% end %>
         <% end %>
-      </table>
       </div>
     </div>
   </div>
 </div>
 
-<div class="post mt-3">
+<div class="post mt-3 ml-5">
   <%= form_with model: @message do |f| %>
     <%= f.text_field :content, autocomplete: :off %>
     <%= f.hidden_field :room_id, value: @room.id %>

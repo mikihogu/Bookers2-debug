@@ -6,7 +6,7 @@ class MessagesController < ApplicationController
       if @message.save
         redirect_to request.referer
       else
-        redirect_to request.referer, notice: "You have failed to send message."
+        redirect_to request.referer, notice: "You need to write something."
       end
     else
       redirect_to request.referer, notice: "Error."
