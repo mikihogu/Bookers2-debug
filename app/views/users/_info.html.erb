@@ -2,36 +2,40 @@
   <tr><%= image_tag user.get_profile_image, size:'100x100' %></tr>
   <tr>
     <th>name</th>
-    <th><%= user.name %></th>
+    <td><%= user.name %></td>
   </tr>
   <tr>
     <th>introduction</th>
-    <th><%= user.introduction %></th>
+    <td><%= user.introduction %></td>
   <tr>
-    <th>follows</th>
-    <th><%= link_to user.following.count, follows_user_path(user) %></th>
+    <td>follows</td>
+    <td><%= link_to user.following.count, follows_user_path(user) %></td>
   </tr>
   <tr>
-    <th>followers</th>
-    <th><%= link_to user.followers.count, followers_user_path(user) %></th>
+    <td>followers</td>
+    <td><%= link_to user.followers.count, followers_user_path(user) %></td>
+  </tr>
+  <tr>
+    <div>
+      <% unless user == current_user %>
+      <td>
+        <% if current_user.following?(user) %>
+          <%= link_to "フォロー外す", user_relationships_path(user.id), class: "btn btn-primary btn-sm", method: :delete %>
+        <% else %>
+          <%= link_to "フォローする", user_relationships_path(user.id), class: "btn btn-success btn-sm", method: :post %>
+        <% end %>
+      </td>
+      <td>
+        <% if (current_user.following? user) && (user.following? current_user) %>
+        <% if current_page?(user_path) %>
+          <%= render 'messages/message_link', user: user, haveRoom: haveRoom, room: room, entry: entry, roomId: roomId %>
+        <% end %>
+        <% end %>
+      </td>
+      <% end %>
+    </div>
   </tr>
 </table>
-
-<div>
-  <% unless user == current_user %>
-    <% if current_user.following?(user) %>
-      <%= link_to "フォロー外す", user_relationships_path(user.id), class: "btn btn-primary btn-sm", method: :delete %>
-    <% else %>
-      <%= link_to "フォローする", user_relationships_path(user.id), class: "btn btn-success btn-sm", method: :post %>
-    <% end %>
-    <% if (current_user.following? user) && (user.following? current_user) %>
-    <% if current_page?(user_path) %>
-      <%= render 'messages/message_link', user: user, haveRoom: haveRoom, room: room, entry: entry %>
-    <% end %>
-    <% end %>
-
-  <% end %>
-</div>
 <div class='row mt-3'>
   <%= link_to edit_user_path(user), class: "btn btn-outline-secondary btn-block" do %>
     <i class="fas fa-user-cog"></i>
