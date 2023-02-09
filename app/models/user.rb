@@ -21,6 +21,7 @@ class User < ApplicationRecord
   has_many :view_counts, dependent: :destroy
   # グループ
   has_many :group_users, dependent: :destroy
+  has_many :groupss, through: :group_users
 
   has_one_attached :profile_image
 

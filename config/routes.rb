@@ -20,7 +20,11 @@ Rails.application.routes.draw do
   resources :rooms, only: [:create, :show]
 
   # グループ
-  resources :groups, only: [:index, :show, :new, :create, :edit, :update]
+  resources :groups, only: [:index, :show, :new, :create, :edit, :update] do
+    get :join, on: :member
+    get :leave, on: :member
+  end
+
 
   get "search" => "searches#search"
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
