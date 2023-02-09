@@ -19,6 +19,8 @@ Rails.application.routes.draw do
   resources :messages, only: [:create, :destroy]
   resources :rooms, only: [:create, :show]
 
+  # グループ
+  resources :groups, only: [:index, :show, :new, :create, :edit, :update]
 
   get "search" => "searches#search"
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html

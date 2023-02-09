@@ -19,6 +19,8 @@ class User < ApplicationRecord
   has_many :messages, dependent: :destroy
   # 閲覧数
   has_many :view_counts, dependent: :destroy
+  # グループ
+  has_many :group_users, dependent: :destroy
 
   has_one_attached :profile_image
 
