@@ -57,19 +57,6 @@ class GroupsController < ApplicationController
     end
   end
 
-  def new_mail
-    @group = Group.find(params[:id])
-    # redirect_to send_mail_group_path
-  end
-
-  def send_mail
-    @group = Group.find(params[:id])
-    group_users = @group.users
-    @mail_title = params[:mail_title]
-    @mail_content = params[:mail_content]
-    # @group.users = params[:user_to]
-    ContactMailer.send_mail(@mail_title, @mail_content,group_users).deliver
-  end
 
   private
 
