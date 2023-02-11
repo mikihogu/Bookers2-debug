@@ -14,13 +14,18 @@ class BooksController < ApplicationController
 
   def index
     to = Time.current.at_end_of_day
-    from = (to - 6.day).at_beginning_of_day
+    from = (to - 6.month).at_beginning_of_day
     books = Book.includes(:favorited_users)
       .sort {|a,b|
         b.favorited_users.includes(:favorites).where(created_at: from...to).size <=>
         a.favorited_users.includes(:favorites).where(created_at: from...to).size
       }
     @books = Kaminari.paginate_array(books).page(params[:page])
+    if params[:latest]
+      @books = Book.latest.page(params[:page])
+    elsif params[:old]
+      @books = Book.old.page(params[:page])
+    end
     @book = Book.new
   end
 
