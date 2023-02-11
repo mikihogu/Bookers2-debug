@@ -24,6 +24,6 @@
   <%= form_with model: @message do |f| %>
     <%= f.text_field :content, autocomplete: :off %>
     <%= f.hidden_field :room_id, value: @room.id %>
-    <!--%= f.submit %>  #submitボタン実装しない-->
+    <%= f.submit %>
   <% end %>
 </div>

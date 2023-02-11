@@ -3,7 +3,7 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    @books = @user.books
+    @books = @user.books.page(params[:page])
     @book = Book.new
     # DM機能
     @currentUserEntry = Entry.where(user_id: current_user.id)
